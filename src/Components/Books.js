@@ -1,5 +1,3 @@
-import react from 'react';
-import PropTypes from 'prop-types';
 
 const BookList=({show,item,onClose})=>{
 
@@ -7,7 +5,9 @@ const BookList=({show,item,onClose})=>{
     {
         return null;
     }
-let thumbnail=item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.smallThumbnail;
+
+    let thumbnail=item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.smallThumbnail;
+    
     return(
         <>
             <div className="overlay">
@@ -25,7 +25,7 @@ let thumbnail=item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.smallThum
                             <a href={item.volumeInfo.previewLink}><button>More</button></a>
                         </div>
                     </div>
-                    <h4 className="description">{item.volumeInfo.description}</h4>
+                    <h4 className="description">{ item.volumeInfo.description }</h4>
                 </div>
             </div>
         </>

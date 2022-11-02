@@ -1,56 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, {useReducer } from 'react';
 import LoginButton from './Login';
 import LogoutButton from './Logout';
+import { useDispatch, useSelector } from 'react-redux';
+import * as action from "./redux/actions/auth";
 
 const clientId = "386932037035-k8v833noqjk7m4auae0t83vnkrqvvg3t.apps.googleusercontent.com";
 
-const  App = () => {
+const  Auth = () => {
 
-  const [isLoggedIn, setisLoggedIn] = useState(false);
-
-  const tokenObj = localStorage.getItem("tokenObj") !=null 
-                  ? JSON.parse(localStorage.getItem("tokenObj")) 
-                  : null;
-                  
-  useEffect(() => {
-    
-    if(tokenObj == null){
-        setisLoggedIn(false);
-    }else{
-        setisLoggedIn(true);
-    }
-  });
-
-  //var accessToken = gapi.auth.getToken().access_token;
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(({auth}) => auth.isLoggedIn);
 
   //Google account login Success
-  const loginSuccess = (res) => {
-    
-    var tokenObj = JSON.stringify(res.tokenObj);
-    var profileObj = JSON.stringify(res.profileObj);
-
-    localStorage.setItem("tokenObj", tokenObj);
-    localStorage.setItem("profileObj", profileObj);
-    
-    setisLoggedIn(true);
+  const loginSuccess = (res) => {    
+    localStorage.setItem("token", JSON.stringify(res.tokenObj));
+    dispatch(action.loginSuccess(res.tokenObj));
     alert("User authenticate sucessfully");
-    console.log("Login successful!", res.profileObj);
-
-  }
+  };
 
   //Google account login Failure
   const loginFailure = (res) => {
       alert("Something went wrong");
       console.log("Login failed. res: ", res);
-  }
+  };
 
   //Google account logout Success
   const logoutSuccess = () => {
-    
-      localStorage.removeItem("tokenObj");
-      localStorage.removeItem("profileObj");
-      setisLoggedIn(false);
-      console.log("Logout successful!");
+    dispatch(action.logoutUser());
   };
   
   //Google account logout Failure
@@ -60,18 +36,15 @@ const  App = () => {
 
   return (
     <div style={{float: 'right', padding: '11px'}}>
-        {
-        tokenObj == null ? 
-        (
-            <LoginButton  loginSuccess={loginSuccess} loginFailure={loginFailure} clientId={clientId} isLoggedIn={isLoggedIn} />
-        ) 
-        :
-        (
-            <LogoutButton logoutSuccess={logoutSuccess} logoutFailure={logoutFailure} clientId={clientId} isLoggedIn={isLoggedIn} />
+      {
+          isLoggedIn === false ? (
+          <LoginButton  loginSuccess={loginSuccess} loginFailure={loginFailure} clientId={clientId} />
+        ):(
+          <LogoutButton logoutSuccess={logoutSuccess} logoutFailure={logoutFailure} clientId={clientId} />
         )
-        }
+      }
     </div>
   );
-}
+};
 
-export default App;
+export default Auth;

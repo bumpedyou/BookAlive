@@ -1,20 +1,18 @@
 import { GoogleLogin } from 'react-google-login';
 
 function Login(props) {
-    
-    const { loginSuccess, loginFailure, clientId, isLoggedIn } = props
 
+    const { loginSuccess, loginFailure, clientId } = props
+    
     return(
-        !isLoggedIn ? (
-                <GoogleLogin
-                    clientId={clientId}
-                    buttonText={"Login"}
-                    onSuccess={loginSuccess}
-                    onFailure={loginFailure}
-                    cookiePolicy={'single_host_origin'}
-                    isSignedIn={true}
-                />
-        ): null
+            <GoogleLogin
+                clientId={clientId}
+                buttonText={"Login"}
+                onSuccess={loginSuccess}
+                onFailure={loginFailure}
+                cookiePolicy={'single_host_origin'}
+                isSignedIn={false}
+            />
         
     )
 }

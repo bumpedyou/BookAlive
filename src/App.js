@@ -17,6 +17,7 @@ const  App = () => {
             scope    : ""
         });
     };
+
     gapi.load('client:auth2', start);
   });
 
@@ -25,7 +26,7 @@ const  App = () => {
   return (
     <div className='App'>
         <Auth />
-        <Main/>
+        <Main />
     </div>
   );
 }

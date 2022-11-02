@@ -2,18 +2,15 @@ import { GoogleLogout } from 'react-google-login';
 
 function Logout(props) {
     
-    const { logoutSuccess, logoutFailure, clientId, isLoggedIn } = props
+    const { logoutSuccess, logoutFailure, clientId } = props
 
     return(
-        isLoggedIn?(
             <GoogleLogout
                 clientId={clientId}
                 buttonText={"Logout"}
                 onLogoutSuccess={logoutSuccess}
                 onLogoutFailure={logoutFailure}
             />
-        ) : null
-            
     )
 }
 

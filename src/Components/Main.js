@@ -1,22 +1,23 @@
 import { useState } from "react";
 import Card from "./Card";
 import axios from "axios";
+import SaveBook from "./SaveBook";
+import { useSelector } from "react-redux";
 
 const Main = () => {
     
     const [search,setSearch] = useState("");
     const [bookData,setData] = useState([]);
     
-    const tokenObj = localStorage.getItem("tokenObj") !=null 
-                    ? JSON.parse(localStorage.getItem("tokenObj")) 
-                    : null;
+    const isLoggedIn = useSelector(({auth}) => auth.isLoggedIn);
 
     const searchBook = (e) => {
 
         if( e.key === "Enter" )
         {
-            if( tokenObj == null ){
+            if( !isLoggedIn ){
                 alert("Please user authenticate through google account");
+                setData([]);
             }
             else
             {
@@ -43,6 +44,12 @@ const Main = () => {
                                 onKeyPress={searchBook}
                         />
                         <button><i className="fas fa-search"></i></button>
+                        {
+                            isLoggedIn ? (
+                                    <SaveBook />
+                            ) : null
+                        }
+
                     </div>
                     <img src="./images/books-background1.jpeg" alt="" />
                 </div>
