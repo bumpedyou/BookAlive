@@ -10,8 +10,9 @@ function Login(props) {
                 buttonText={"Login"}
                 onSuccess={loginSuccess}
                 onFailure={loginFailure}
-                cookiePolicy={'single_host_origin'}
-                isSignedIn={false}
+                cookiePolicy={"single_host_origin"}
+                isSignedIn={true}
+                prompt="consent"
             />
         
     )

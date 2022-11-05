@@ -1,10 +1,10 @@
-import React, {useReducer } from 'react';
+import React from 'react';
 import LoginButton from './Login';
 import LogoutButton from './Logout';
 import { useDispatch, useSelector } from 'react-redux';
 import * as action from "./redux/actions/auth";
 
-const clientId = "386932037035-k8v833noqjk7m4auae0t83vnkrqvvg3t.apps.googleusercontent.com";
+const clientId = "769884231431-of9isdpkepiu948tv5n2b5isgqjsa875.apps.googleusercontent.com";
 
 const  Auth = () => {
 
@@ -12,7 +12,7 @@ const  Auth = () => {
   const isLoggedIn = useSelector(({auth}) => auth.isLoggedIn);
 
   //Google account login Success
-  const loginSuccess = (res) => {    
+  const loginSuccess = (res) => {
     localStorage.setItem("token", JSON.stringify(res.tokenObj));
     dispatch(action.loginSuccess(res.tokenObj));
     alert("User authenticate sucessfully");

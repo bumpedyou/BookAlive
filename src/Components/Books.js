@@ -12,7 +12,7 @@ const BookList=({show,item,onClose})=>{
         <>
             <div className="overlay">
                 <div className="overlay-inner">
-                    <button className="close" onClick={onClose}><i class="fas fa-times"></i></button>
+                    <button className="close" onClick={onClose}><i className="fas fa-times"></i></button>
                     <div className="inner-box">
                         <img src={thumbnail} alt="" />
                         <div className="info">

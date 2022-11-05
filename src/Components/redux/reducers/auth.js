@@ -14,7 +14,7 @@ function auth(state = initialState, action){
             return {
                 ...state,
                 isLoggedIn: true,
-                token: action.token,
+                token: action.tokenObj,
             };
 
         case 'LOGOUT':

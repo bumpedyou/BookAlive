@@ -3,32 +3,43 @@ import Card from "./Card";
 import axios from "axios";
 import SaveBook from "./SaveBook";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Main = () => {
     
     const [search,setSearch] = useState("");
     const [bookData,setData] = useState([]);
-    
-    const isLoggedIn = useSelector(({auth}) => auth.isLoggedIn);
+    const [addStatus, setAddStatus] = useState(false);
 
+    const isLoggedIn = useSelector(( { auth } ) => auth.isLoggedIn);
+
+    useEffect( () => {
+        if ( !isLoggedIn ) {
+            setData([]);
+        }
+    }, [isLoggedIn] );
+    
     const searchBook = (e) => {
 
         if( e.key === "Enter" )
         {
-            if( !isLoggedIn ){
+            if( !isLoggedIn ) {
                 alert("Please user authenticate through google account");
-                setData([]);
             }
             else
             {
                 //Decided to use axios to replace JSON response because I'm more familiar with this
                 axios.get('https://www.googleapis.com/books/v1/volumes?q='+search+'&maxResults=40')
-                .then(res=>setData(res.data.items))
-                .catch(err=>console.log(err))
+                    .then(res=>setData(res.data.items))
+                    .catch(err=>console.log(err))
             }
         }
     }
-    
+
+    const setAddBookStatus = () => {
+        setAddStatus(true);
+    }
+
     return(
         <>
             <div className="header">
@@ -46,18 +57,18 @@ const Main = () => {
                         <button><i className="fas fa-search"></i></button>
                         {
                             isLoggedIn ? (
-                                    <SaveBook />
+                                    <SaveBook addStatus={addStatus} />
                             ) : null
                         }
 
                     </div>
-                    <img src="./images/books-background1.jpeg" alt="" />
+                    {/* <img src="images/books-background1.jpeg" alt="" /> */}
                 </div>
             </div>
 
             <div className="container">
               {
-                    <Card book={bookData} />
+                    <Card key="card" book={bookData} saveStatus={setAddBookStatus} />
               }  
             </div>
         </>

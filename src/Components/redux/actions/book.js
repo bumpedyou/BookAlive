@@ -5,6 +5,6 @@ export const addBook = (item) => ({
 })
 
 
-export const clearAddedBooItems = (item) => ({
+export const clearAddedBooItems = () => ({
   type: 'CLEAR_BOOK',
 })

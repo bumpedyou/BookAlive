@@ -5,24 +5,22 @@ import { gapi } from 'gapi-script';
 import Main from './Components/Main';
 import Auth from './Components/Auth';
 
-const clientId = "386932037035-k8v833noqjk7m4auae0t83vnkrqvvg3t.apps.googleusercontent.com";
+const clientId = "769884231431-of9isdpkepiu948tv5n2b5isgqjsa875.apps.googleusercontent.com";
 
 const  App = () => {
                   
   useEffect(() => {
-    
-    const start = () => {
-        gapi.client.init({
-            clientId : clientId,
-            scope    : ""
-        });
+    const initClient = () => {
+      gapi.client.init({
+          clientId: clientId,
+          apiKey:"AIzaSyB2x2HAHztoKFF5yikA68k0xAnJqThejTU",
+          scope: "https://www.googleapis.com/auth/books"
+      });
     };
-
-    gapi.load('client:auth2', start);
+    gapi.load("client:auth2", initClient);
+    console.log(gapi);
   });
-
-  //var accessToken = gapi.auth.getToken().access_token;
-
+  
   return (
     <div className='App'>
         <Auth />

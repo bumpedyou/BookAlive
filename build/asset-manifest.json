@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4b257e1c.css",
+    "main.js": "/static/js/main.c713e80c.js",
+    "static/media/books-background1.jpeg": "/static/media/books-background1.0fdaf2f3f1273422f5f4.jpeg",
+    "index.html": "/index.html",
+    "main.4b257e1c.css.map": "/static/css/main.4b257e1c.css.map",
+    "main.c713e80c.js.map": "/static/js/main.c713e80c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4b257e1c.css",
+    "static/js/main.c713e80c.js"
+  ]
+}
